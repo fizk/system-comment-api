@@ -1,0 +1,8 @@
+language: php
+
+services:
+  - docker
+
+script:
+    - docker build --build-arg ENV=development -t comment-api-test .
+    - docker run -v $(pwd)/tests:/var/www/tests comment-api-test bash -c "./vendor/bin/phpunit && ./vendor/bin/phpcs --standard=./phpcs.xml ./src"
