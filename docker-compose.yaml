@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  comment-api:
+    build: .
+    container_name: comment-api
+    ports:
+      - 8080:80
+    depends_on:
+        - comment-api-database
+    environment:
+        # - DB_PASSWORD=example
+        # - DB_USER=root
+        - DB_HOST=comment-api-database
+        - DB_DATABASE=comment
+    volumes:
+      - ./src:/var/www/src
+      - ./config:/var/www/config
+      - ./public:/var/www/public
+
+  comment-api-database:
+    image: mongo
+    container_name: comment-api-database
+    restart: always
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: example
+
+  test:
+    build:
+      context: .
+      args:
+        - ENV=development
+    container_name: comment-api-test
+    depends_on:
+        - comment-api-database
+    environment:
+        # - DB_PASSWORD=example
+        # - DB_USER=root
+        - DB_HOST=comment-api-database
+        - DB_DATABASE=comment
+    volumes:
+      - ./src:/var/www/src
+      - ./tests:/var/www/tests
+      - ./phpunit.xml:/var/www/phpunit.xml:ro
+      - ./config:/var/www/config
+      - ./public:/var/www/public
+    command: bash -c "./vendor/bin/phpunit && ./vendor/bin/phpcs --standard=./phpcs.xml ./src"
