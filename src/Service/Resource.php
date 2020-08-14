@@ -51,7 +51,7 @@ class Resource implements DatabaseAware, EventDispatcherAware
     {
         try {
             $result = $this->client
-                ->selectCollection('category')
+                ->selectCollection('resource')
                 ->insertOne(
                     array_merge(
                         $model->jsonSerialize(),

@@ -21,17 +21,17 @@ return [
         },
         Handler\GetResources::class => function(ContainerInterface $container, $requestedName) {
             return (new Handler\GetResources())
-                ->setResourceService($container->get(Service\Category::class))
+                ->setResourceService($container->get(Service\Resource::class))
                 ;
         },
         Handler\GetResource::class => function(ContainerInterface $container, $requestedName) {
             return (new Handler\GetResource())
-                ->setResourceService($container->get(Service\Category::class))
+                ->setResourceService($container->get(Service\Resource::class))
                 ;
         },
         Handler\SetResource::class => function(ContainerInterface $container, $requestedName) {
             return (new Handler\SetResource())
-                ->setResourceService($container->get(Service\Category::class))
+                ->setResourceService($container->get(Service\Resource::class))
                 ;
         },
         Handler\GetMessagesByResource::class => function(ContainerInterface $container, $requestedName) {
