@@ -12,8 +12,6 @@ services:
     depends_on:
         - comment-api-database
     environment:
-        # - DB_PASSWORD=example
-        # - DB_USER=root
         - DB_HOST=comment-api-database
         - DB_DATABASE=comment
     volumes:
@@ -25,9 +23,6 @@ services:
     image: mongo
     container_name: comment-api-database
     restart: always
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: root
-    #   MONGO_INITDB_ROOT_PASSWORD: example
 
   test:
     build:
@@ -38,8 +33,6 @@ services:
     depends_on:
         - comment-api-database
     environment:
-        # - DB_PASSWORD=example
-        # - DB_USER=root
         - DB_HOST=comment-api-database
         - DB_DATABASE=comment
     volumes:
